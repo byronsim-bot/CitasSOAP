@@ -30,5 +30,17 @@ namespace CitasSOAP.Services
 
         [OperationContract]
         List<Cita> ObtenerCitaPorCedula(string cedula);
+
+        [OperationContract]
+        Paciente? ObtenerPaciente(int id);
+
+        [OperationContract]
+        Paciente AgregarPaciente(Paciente paciente);
+
+        [OperationContract]
+        Paciente? ActualizarPaciente(Paciente paciente);
+
+        [OperationContract]
+        bool EliminarPaciente(int id);
     }
 }

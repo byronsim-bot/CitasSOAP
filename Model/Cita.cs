@@ -20,5 +20,7 @@ namespace CitasSOAP.Model
         public bool Estado { get; set; }
 
         public int IdPaciente { get; set; }
+
+        public int IdMedico { get; set; }
     }
 }

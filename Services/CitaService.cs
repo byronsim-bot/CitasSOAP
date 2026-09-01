@@ -49,8 +49,9 @@ namespace CitasSOAP.Services
 			citaExistente.Tratamiento = cita.Tratamiento;
 			citaExistente.Estado = cita.Estado;
 			citaExistente.IdPaciente = cita.IdPaciente;
+            citaExistente.IdMedico = cita.IdMedico;
 
-			_context.SaveChanges();
+            _context.SaveChanges();
 
 			return citaExistente;
 		}
@@ -78,10 +79,51 @@ namespace CitasSOAP.Services
 		public List<Cita> ObtenerCitaPorCedula(string cedula)
 		{
 			return _context.Citas
-				.Where(c => _context.Pacientes
-					.Any(p => p.IdPaciente == c.IdPaciente &&
-							  p.Cedula == cedula))
-				.ToList();
+				.Where(c => _context.Pacientes.Any(p => p.IdPaciente == c.IdPaciente &&  p.Cedula == cedula)).ToList();
 		}
-	}
+
+        public Paciente? ObtenerPaciente(int id)
+        {
+            return _context.Pacientes.Find(id);
+        }
+
+        public Paciente AgregarPaciente(Paciente paciente)
+        {
+            _context.Pacientes.Add(paciente);
+            _context.SaveChanges();
+
+            return paciente;
+        }
+
+        public Paciente? ActualizarPaciente(Paciente paciente)
+        {
+            var pacienteExistente = _context.Pacientes.Find(paciente.IdPaciente);
+
+            if (pacienteExistente == null)
+                return null;
+
+            pacienteExistente.Cedula = paciente.Cedula;
+            pacienteExistente.Nombre = paciente.Nombre;
+            pacienteExistente.Apellido = paciente.Apellido;
+            pacienteExistente.Telefono = paciente.Telefono;
+            pacienteExistente.Estado = paciente.Estado;
+
+            _context.SaveChanges();
+
+            return pacienteExistente;
+        }
+
+        public bool EliminarPaciente(int id)
+        {
+            var paciente = _context.Pacientes.Find(id);
+
+            if (paciente == null)
+                return false;
+
+            _context.Pacientes.Remove(paciente);
+            _context.SaveChanges();
+
+            return true;
+        }
+    }
 }

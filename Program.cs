@@ -13,7 +13,8 @@ namespace CitasSOAP
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Registra el DbContext y usa la cadena "ConexionSQL" de appsettings.json
+            // Registra el DbContext y usa la cadena "ConexionSQL"
+            // que tenemos en appsettings.json
             builder.Services.AddDbContext<CitasDBContext>(options =>
                 options.UseSqlServer(
                     builder.Configuration.GetConnectionString("ConexionSQL")
@@ -23,14 +24,21 @@ namespace CitasSOAP
             // Registra la implementación del servicio SOAP
             builder.Services.AddScoped<CitaService>();
 
-            // Activa CoreWCF y la publicación del WSDL
+            // Activa los controladores para nuestro servicio REST
+            builder.Services.AddControllers();
+
+            // Activa CoreWCF y la publicación del WSDL para SOAP
             builder.Services
                 .AddServiceModelServices()
                 .AddServiceModelMetadata();
 
             var app = builder.Build();
 
-            // Publica el servicio SOAP en esta ruta
+            // Publica los controladores REST
+            // Por ejemplo: /api/Medico
+            app.MapControllers();
+
+            // Publica el servicio SOAP
             app.UseServiceModel(serviceBuilder =>
             {
                 serviceBuilder
@@ -41,7 +49,7 @@ namespace CitasSOAP
                     );
             });
 
-            // Permite consultar el WSDL por HTTP
+            // Permite consultar el WSDL de SOAP por HTTP
             var metadataBehavior =
                 app.Services.GetRequiredService<ServiceMetadataBehavior>();
 
