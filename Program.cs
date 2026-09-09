@@ -13,32 +13,45 @@ namespace CitasSOAP
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Registra el DbContext y usa la cadena "ConexionSQL"
-            // que tenemos en appsettings.json
+            // Registra el DbContext
             builder.Services.AddDbContext<CitasDBContext>(options =>
                 options.UseSqlServer(
                     builder.Configuration.GetConnectionString("ConexionSQL")
                 )
             );
 
-            // Registra la implementación del servicio SOAP
+            // Registra el servicio SOAP
             builder.Services.AddScoped<CitaService>();
 
-            // Activa los controladores para nuestro servicio REST
+            // Activa los controladores REST
             builder.Services.AddControllers();
 
-            // Activa CoreWCF y la publicación del WSDL para SOAP
+            // Habilita CORS para Angular
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("PermitirAngular", policy =>
+                {
+                    policy
+                        .WithOrigins("http://localhost:4200")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
+
+            // Activa CoreWCF y WSDL
             builder.Services
                 .AddServiceModelServices()
                 .AddServiceModelMetadata();
 
             var app = builder.Build();
 
-            // Publica los controladores REST
-            // Por ejemplo: /api/Medico
+            // Aplica CORS
+            app.UseCors("PermitirAngular");
+
+            // Publica controladores REST
             app.MapControllers();
 
-            // Publica el servicio SOAP
+            // Publica SOAP
             app.UseServiceModel(serviceBuilder =>
             {
                 serviceBuilder
@@ -49,7 +62,7 @@ namespace CitasSOAP
                     );
             });
 
-            // Permite consultar el WSDL de SOAP por HTTP
+            // Habilita WSDL
             var metadataBehavior =
                 app.Services.GetRequiredService<ServiceMetadataBehavior>();
 

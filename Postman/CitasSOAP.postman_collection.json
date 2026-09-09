@@ -1,0 +1,609 @@
+{
+  "info": {
+    "_postman_id": "0dd2565c-42ee-4e63-839f-70e2c5fa6905",
+    "name": "CitasSOAP",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "48375481",
+    "_collection_link": "https://go.postman.co/collection/48375481-0dd2565c-42ee-4e63-839f-70e2c5fa6905?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "REST",
+      "item": [
+        {
+          "name": "Medico",
+          "item": [
+            {
+              "name": "ObtenerMedicos",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7074/api/Medico",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7074",
+                  "path": [
+                    "api",
+                    "Medico"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "ObtenerMedicoPorId",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7074/api/Medico/1",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7074",
+                  "path": [
+                    "api",
+                    "Medico",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "ObtenerMedicoPorCedula",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7074/api/Medico/cedula/1722382926",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7074",
+                  "path": [
+                    "api",
+                    "Medico",
+                    "cedula",
+                    "1722382926"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "AgregarMedico",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"cedula\": \"1722382996\",\r\n  \"nombre\": \"Carlosdr\",\r\n  \"apellido\": \"Ramirezdr\",\r\n  \"cargo\": \"Medico\",\r\n  \"especialidad\": \"Urólogo\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:7074/api/Medico",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7074",
+                  "path": [
+                    "api",
+                    "Medico"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "ActualizarMedico",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"cedula\": \"1712345678\",\r\n  \"nombre\": \"Carlos\",\r\n  \"apellido\": \"Ramirez\",\r\n  \"cargo\": \"Medico\",\r\n  \"especialidad\": \"Pediatria Neonatal\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:7074/api/Medico/1",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7074",
+                  "path": [
+                    "api",
+                    "Medico",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "EliminarMedico",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7074/api/Medico/6",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7074",
+                  "path": [
+                    "api",
+                    "Medico",
+                    "6"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ObtenerPacientes",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "text/xml; charset=utf-8",
+            "type": "text"
+          },
+          {
+            "key": "SOAPAction",
+            "value": "\"http://tempuri.org/ICitaService/ObtenerPacientes\"",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n    <soap:Body>\r\n        <ObtenerPacientes xmlns=\"http://tempuri.org/\" />\r\n    </soap:Body>\r\n</soap:Envelope>",
+          "options": {
+            "raw": {
+              "language": "xml"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5237/CitaService.svc",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5237",
+          "path": [
+            "CitaService.svc"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ObtenerCitas",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "text/xml; charset=utf-8",
+            "type": "text"
+          },
+          {
+            "key": "SOAPAction",
+            "value": "\"http://tempuri.org/ICitaService/ObtenerCitas\"",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n    <soap:Body>\r\n        <ObtenerCitas xmlns=\"http://tempuri.org/\" />\r\n    </soap:Body>\r\n</soap:Envelope>",
+          "options": {
+            "raw": {
+              "language": "xml"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5237/CitaService.svc",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5237",
+          "path": [
+            "CitaService.svc"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ObtenerCita",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "text/xml; charset=utf-8",
+            "type": "text"
+          },
+          {
+            "key": "SOAPAction",
+            "value": "\"http://tempuri.org/ICitaService/ObtenerCita\"",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:5237/CitaService.svc?",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5237",
+          "path": [
+            "CitaService.svc"
+          ],
+          "query": [
+            {
+              "key": "",
+              "value": null,
+              "type": "text"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "AgregarCita",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "text/xml; charset=utf-8",
+            "type": "text"
+          },
+          {
+            "key": "SOAPAction",
+            "value": "\"http://tempuri.org/ICitaService/ObtenerCita\"",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:5237/CitaService.svc",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5237",
+          "path": [
+            "CitaService.svc"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ActualizarCita",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "text/xml; charset=utf-8",
+            "type": "text"
+          },
+          {
+            "key": "SOAPAction",
+            "value": "\"http://tempuri.org/ICitaService/ActualizarCita\"",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:5237/CitaService.svc",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5237",
+          "path": [
+            "CitaService.svc"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "EliminarCita",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "text/xml; charset=utf-8",
+            "type": "text"
+          },
+          {
+            "key": "SOAPAction",
+            "value": "\"http://tempuri.org/ICitaService/EliminarCita\"",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n    <soap:Body>\r\n        <EliminarCita xmlns=\"http://tempuri.org/\">\r\n            <id>2</id>\r\n        </EliminarCita>\r\n    </soap:Body>\r\n</soap:Envelope>",
+          "options": {
+            "raw": {
+              "language": "xml"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5237/CitaService.svc",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5237",
+          "path": [
+            "CitaService.svc"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ObtenerCitaPorTratamiento",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "text/xml; charset=utf-8",
+            "type": "text"
+          },
+          {
+            "key": "SOAPAction",
+            "value": "\"http://tempuri.org/ICitaService/ObtenerCitaPorTratamiento\"",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n    <soap:Body>\r\n        <ObtenerCitaPorTratamiento xmlns=\"http://tempuri.org/\">\r\n            <tratamiento>Evaluacion</tratamiento>\r\n        </ObtenerCitaPorTratamiento>\r\n    </soap:Body>\r\n</soap:Envelope>",
+          "options": {
+            "raw": {
+              "language": "xml"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5237/CitaService.svc",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5237",
+          "path": [
+            "CitaService.svc"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ObtenerCitaPorCedula",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "text/xml; charset=utf-8",
+            "type": "text"
+          },
+          {
+            "key": "SOAPAction",
+            "value": "\"http://tempuri.org/ICitaService/ObtenerCitaPorCedula\"",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n    <soap:Body>\r\n        <ObtenerCitaPorCedula xmlns=\"http://tempuri.org/\">\r\n            <cedula>0912345678</cedula>\r\n        </ObtenerCitaPorCedula>\r\n    </soap:Body>\r\n</soap:Envelope>"
+        },
+        "url": {
+          "raw": "http://localhost:5237/CitaService.svc",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5237",
+          "path": [
+            "CitaService.svc"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "AgregarPaciente",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "SOAPAction",
+            "value": "\"http://tempuri.org/ICitaService/AgregarPaciente\"",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "text/xml; charset=utf-8",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:tem=\"http://tempuri.org/\"\r\n    xmlns:a=\"http://schemas.datacontract.org/2004/07/CitasSOAP.Model\">\r\n\r\n    <soap:Body>\r\n        <tem:AgregarPaciente>\r\n            <tem:paciente>\r\n                <a:Apellido>Hernandezpact</a:Apellido>\r\n                <a:Cedula>1722382966</a:Cedula>\r\n                <a:Estado>true</a:Estado>\r\n                <a:IdPaciente>0</a:IdPaciente>\r\n                <a:Nombre>Byronpact</a:Nombre>\r\n                <a:Telefono>0998765432</a:Telefono>\r\n            </tem:paciente>\r\n        </tem:AgregarPaciente>\r\n    </soap:Body>\r\n</soap:Envelope>",
+          "options": {
+            "raw": {
+              "language": "xml"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5237/CitaService.svc",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5237",
+          "path": [
+            "CitaService.svc"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ObtenerPaciente",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "SOAPAction",
+            "value": "\"http://tempuri.org/ICitaService/ObtenerPaciente\"",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "text/xml; charset=utf-8",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:tem=\"http://tempuri.org/\">\r\n\r\n    <soap:Body>\r\n        <tem:ObtenerPaciente>\r\n            <tem:id>2</tem:id>\r\n        </tem:ObtenerPaciente>\r\n    </soap:Body>\r\n\r\n</soap:Envelope>",
+          "options": {
+            "raw": {
+              "language": "xml"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5237/CitaService.svc",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5237",
+          "path": [
+            "CitaService.svc"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ActualizarPaciente",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "text/xml; charset=utf-8",
+            "type": "text"
+          },
+          {
+            "key": "SOAPAction",
+            "value": "\"http://tempuri.org/ICitaService/ActualizarPaciente\"",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:tem=\"http://tempuri.org/\"\r\n    xmlns:a=\"http://schemas.datacontract.org/2004/07/CitasSOAP.Model\">\r\n\r\n    <soap:Body>\r\n        <tem:ActualizarPaciente>\r\n            <tem:paciente>\r\n                <a:Apellido>Hernandez</a:Apellido>\r\n                <a:Cedula>1722382966</a:Cedula>\r\n                <a:Estado>true</a:Estado>\r\n                <a:IdPaciente>2</a:IdPaciente>\r\n                <a:Nombre>Byron</a:Nombre>\r\n                <a:Telefono>0987654321</a:Telefono>\r\n            </tem:paciente>\r\n        </tem:ActualizarPaciente>\r\n    </soap:Body>\r\n</soap:Envelope>",
+          "options": {
+            "raw": {
+              "language": "xml"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5237/CitaService.svc",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5237",
+          "path": [
+            "CitaService.svc"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "EliminarPaciente",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "text/xml; charset=utf-8",
+            "type": "text"
+          },
+          {
+            "key": "SOAPAction",
+            "value": "\"http://tempuri.org/ICitaService/EliminarPaciente\"",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:tem=\"http://tempuri.org/\">\r\n\r\n    <soap:Body>\r\n        <tem:EliminarPaciente>\r\n            <tem:id>2</tem:id>\r\n        </tem:EliminarPaciente>\r\n    </soap:Body>\r\n\r\n</soap:Envelope>"
+        },
+        "url": {
+          "raw": "http://localhost:5237/CitaService.svc?Con",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5237",
+          "path": [
+            "CitaService.svc"
+          ],
+          "query": [
+            {
+              "key": "Con",
+              "value": null,
+              "type": "text"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

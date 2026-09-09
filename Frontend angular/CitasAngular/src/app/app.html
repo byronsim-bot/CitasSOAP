@@ -1,0 +1,1590 @@
+
+<style>
+  :host {
+    display: block;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f7fb;
+    color: #1f2937;
+    min-height: 100vh;
+    padding: 30px 16px;
+  }
+
+  .container {
+    max-width: 1180px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    padding: 32px;
+  }
+
+  h1 {
+    margin: 0;
+    color: #17324d;
+    font-size: 32px;
+    text-align: center;
+  }
+
+  .container > p {
+    margin: 10px 0 24px;
+    text-align: center;
+    color: #64748b;
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px solid #e2e8f0;
+    margin: 28px 0;
+  }
+
+  .menu-navegacion {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 18px 0;
+  }
+
+  .menu-navegacion a {
+    text-decoration: none;
+    color: #ffffff;
+    background: #2563eb;
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: 0.2s ease;
+  }
+
+  .menu-navegacion a:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+  }
+
+  section {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 28px;
+  }
+
+  h2 {
+    margin-top: 0;
+    color: #17324d;
+    font-size: 25px;
+  }
+
+  h3 {
+    color: #334155;
+    margin-top: 22px;
+  }
+
+  form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px 20px;
+    margin-bottom: 22px;
+  }
+
+  form > div {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  form > div:has(input[type="checkbox"]) {
+    justify-content: flex-end;
+  }
+
+  label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #475569;
+  }
+
+  input[type="text"],
+  input[type="date"],
+  input[type="time"],
+  select {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    padding: 10px 12px;
+    background: #ffffff;
+    color: #1f2937;
+    font-size: 14px;
+    outline: none;
+    transition: 0.2s ease;
+  }
+
+  input[type="text"]:focus,
+  input[type="date"]:focus,
+  input[type="time"]:focus,
+  select:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+  }
+
+  input[type="checkbox"] {
+    width: 17px;
+    height: 17px;
+    accent-color: #2563eb;
+    margin-right: 7px;
+  }
+
+  button {
+    border: 0;
+    border-radius: 9px;
+    padding: 9px 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+    background: #2563eb;
+    color: white;
+    margin-right: 7px;
+    margin-top: 4px;
+  }
+
+  button:hover {
+    transform: translateY(-1px);
+    filter: brightness(0.95);
+  }
+
+  button[type="submit"] {
+    background: #2563eb;
+  }
+
+  td button:nth-of-type(1) {
+    background: #0f766e;
+  }
+
+  td button:nth-of-type(2) {
+    background: #dc2626;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+  }
+
+  thead {
+    background: #17324d;
+    color: #ffffff;
+  }
+
+  th,
+  td {
+    padding: 12px 10px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 14px;
+  }
+
+  tbody tr:hover {
+    background: #f1f5f9;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: 0;
+  }
+
+  #citas > div:has(h3) {
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 12px;
+    padding: 18px;
+    margin: 18px 0;
+  }
+
+  @media (max-width: 850px) {
+    .container {
+      padding: 20px;
+    }
+
+    form {
+      grid-template-columns: 1fr;
+    }
+
+    table {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    h1 {
+      font-size: 26px;
+    }
+  }
+
+  .ver-detalle {
+    background: transparent !important;
+    color: #2563eb !important;
+    padding: 7px 8px !important;
+    box-shadow: none !important;
+  }
+
+  .ver-detalle:hover {
+    background: #eff6ff !important;
+    transform: none !important;
+  }
+
+  .modal-fondo {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(15, 23, 42, 0.58);
+    backdrop-filter: blur(3px);
+  }
+
+  .modal-detalle {
+    width: min(720px, 100%);
+    max-height: 90vh;
+    overflow-y: auto;
+    background: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 24px 70px rgba(15, 23, 42, 0.28);
+    padding: 26px;
+  }
+
+  .modal-cabecera {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 16px;
+    margin-bottom: 20px;
+  }
+
+  .modal-cabecera h2 {
+    margin: 4px 0 0;
+  }
+
+  .modal-etiqueta {
+    color: #2563eb;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .modal-cerrar {
+    background: #f1f5f9 !important;
+    color: #475569 !important;
+    width: 36px;
+    height: 36px;
+    padding: 0 !important;
+    margin: 0 !important;
+    border-radius: 50%;
+    font-size: 24px;
+    line-height: 1;
+  }
+
+  .detalle-bloque {
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 18px;
+    margin-bottom: 16px;
+  }
+
+  .detalle-bloque h3 {
+    margin: 0 0 16px;
+    color: #17324d;
+  }
+
+  .detalle-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .detalle-grid p,
+  .detalle-texto {
+    margin: 0;
+    padding: 12px;
+    background: #f8fafc;
+    border-radius: 10px;
+  }
+
+  .detalle-grid strong,
+  .detalle-texto strong,
+  .recomendacion-modal strong {
+    display: block;
+    color: #64748b;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 5px;
+  }
+
+  .detalle-grid span,
+  .detalle-texto span {
+    color: #1e293b;
+    font-weight: 600;
+  }
+
+  .detalle-texto {
+    margin-top: 12px;
+  }
+
+  .clima-modal {
+    background: #f8fbff;
+    border-color: #bfdbfe;
+  }
+
+  .recomendacion-modal {
+    margin-top: 14px;
+    padding: 14px;
+    border-radius: 10px;
+    background: #eff6ff;
+  }
+
+  .recomendacion-modal p {
+    margin: 5px 0 0;
+    line-height: 1.5;
+  }
+
+  .estado-clima {
+    margin: 0;
+    color: #475569;
+  }
+
+  .error-modal {
+    color: #b91c1c;
+  }
+
+  .modal-pie {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  @media (max-width: 620px) {
+    .modal-detalle {
+      padding: 18px;
+    }
+
+    .detalle-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+</style>
+
+<div class="container">
+
+  <h1>Sistema de Gestión de Citas Médicas</h1>
+
+  <p>
+    Integración SOAP, REST y API externa
+  </p>
+
+  <hr>
+
+  <nav class="menu-navegacion">
+    <a href="#pacientes">Pacientes</a>
+    <a href="#medicos">Médicos</a>
+    <a href="#citas">Citas</a>
+  </nav>
+
+  <hr>
+
+  <!-- ===================================== -->
+  <!-- PACIENTES -->
+  <!-- ===================================== -->
+
+  <section id="pacientes">
+
+    <h2>Pacientes</h2>
+
+    <h3>Registrar paciente</h3>
+
+    <form
+      (ngSubmit)="agregarPaciente()"
+    >
+
+      <div>
+
+        <label>Cédula</label>
+
+        <input
+          type="text"
+          name="cedulaPaciente"
+          [(ngModel)]="nuevoPaciente.cedula"
+          required
+        >
+
+      </div>
+
+      <div>
+
+        <label>Nombre</label>
+
+        <input
+          type="text"
+          name="nombrePaciente"
+          [(ngModel)]="nuevoPaciente.nombre"
+          required
+        >
+
+      </div>
+
+      <div>
+
+        <label>Apellido</label>
+
+        <input
+          type="text"
+          name="apellidoPaciente"
+          [(ngModel)]="nuevoPaciente.apellido"
+          required
+        >
+
+      </div>
+
+      <div>
+
+        <label>Teléfono</label>
+
+        <input
+          type="text"
+          name="telefonoPaciente"
+          [(ngModel)]="nuevoPaciente.telefono"
+        >
+
+      </div>
+
+      <div>
+
+        <label>
+
+          <input
+            type="checkbox"
+            name="estadoPaciente"
+            [(ngModel)]="nuevoPaciente.estado"
+          >
+
+          Activo
+
+        </label>
+
+      </div>
+
+      <button
+        type="submit"
+      >
+        Guardar paciente
+      </button>
+
+    </form>
+
+    @if (errorPacientes) {
+
+      <p>
+        {{ errorPacientes }}
+      </p>
+
+    }
+
+    @if (pacienteEditando) {
+
+      <hr>
+
+      <h3>Editar paciente</h3>
+
+      <form
+        (ngSubmit)="guardarCambiosPaciente()"
+      >
+
+        <div>
+
+          <label>Cédula</label>
+
+          <input
+            type="text"
+            name="editarCedulaPaciente"
+            [(ngModel)]="pacienteEditando.cedula"
+          >
+
+        </div>
+
+        <div>
+
+          <label>Nombre</label>
+
+          <input
+            type="text"
+            name="editarNombrePaciente"
+            [(ngModel)]="pacienteEditando.nombre"
+          >
+
+        </div>
+
+        <div>
+
+          <label>Apellido</label>
+
+          <input
+            type="text"
+            name="editarApellidoPaciente"
+            [(ngModel)]="pacienteEditando.apellido"
+          >
+
+        </div>
+
+        <div>
+
+          <label>Teléfono</label>
+
+          <input
+            type="text"
+            name="editarTelefonoPaciente"
+            [(ngModel)]="pacienteEditando.telefono"
+          >
+
+        </div>
+
+        <div>
+
+          <label>
+
+            <input
+              type="checkbox"
+              name="editarEstadoPaciente"
+              [(ngModel)]="pacienteEditando.estado"
+            >
+
+            Activo
+
+          </label>
+
+        </div>
+
+        <button
+          type="submit"
+        >
+          Guardar cambios
+        </button>
+
+        <button
+          type="button"
+          (click)="cancelarEdicionPaciente()"
+        >
+          Cancelar
+        </button>
+
+      </form>
+
+    }
+
+    <h3>Listado de pacientes</h3>
+
+    <table border="1">
+
+      <thead>
+
+        <tr>
+
+          <th>ID</th>
+          <th>Cédula</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Teléfono</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        @for (
+          paciente of pacientes;
+          track paciente.idPaciente
+        ) {
+
+          <tr>
+
+            <td>
+              {{ paciente.idPaciente }}
+            </td>
+
+            <td>
+              {{ paciente.cedula }}
+            </td>
+
+            <td>
+              {{ paciente.nombre }}
+            </td>
+
+            <td>
+              {{ paciente.apellido }}
+            </td>
+
+            <td>
+              {{ paciente.telefono }}
+            </td>
+
+            <td>
+
+              @if (paciente.estado) {
+
+                Activo
+
+              } @else {
+
+                Inactivo
+
+              }
+
+            </td>
+
+            <td>
+
+              <button
+                type="button"
+                (click)="editarPaciente(paciente)"
+              >
+                Editar
+              </button>
+
+              <button
+                type="button"
+                (click)="eliminarPaciente(
+                  paciente.idPaciente
+                )"
+              >
+                Eliminar
+              </button>
+
+            </td>
+
+          </tr>
+
+        }
+
+      </tbody>
+
+    </table>
+
+  </section>
+
+  <hr>
+
+  <!-- ===================================== -->
+  <!-- MÉDICOS -->
+  <!-- ===================================== -->
+
+  <section id="medicos">
+
+    <h2>Médicos</h2>
+
+    <h3>Registrar médico</h3>
+
+    <form
+      (ngSubmit)="agregarMedico()"
+    >
+
+      <div>
+
+        <label>Cédula</label>
+
+        <input
+          type="text"
+          name="cedulaMedico"
+          [(ngModel)]="nuevoMedico.cedula"
+          required
+        >
+
+      </div>
+
+      <div>
+
+        <label>Nombre</label>
+
+        <input
+          type="text"
+          name="nombreMedico"
+          [(ngModel)]="nuevoMedico.nombre"
+          required
+        >
+
+      </div>
+
+      <div>
+
+        <label>Apellido</label>
+
+        <input
+          type="text"
+          name="apellidoMedico"
+          [(ngModel)]="nuevoMedico.apellido"
+          required
+        >
+
+      </div>
+
+      <div>
+
+        <label>Cargo</label>
+
+        <input
+          type="text"
+          name="cargoMedico"
+          [(ngModel)]="nuevoMedico.cargo"
+        >
+
+      </div>
+
+      <div>
+
+        <label>Especialidad</label>
+
+        <input
+          type="text"
+          name="especialidadMedico"
+          [(ngModel)]="nuevoMedico.especialidad"
+        >
+
+      </div>
+
+      <button
+        type="submit"
+      >
+        Guardar médico
+      </button>
+
+    </form>
+
+    @if (medicoEditando) {
+
+      <hr>
+
+      <h3>Editar médico</h3>
+
+      <form
+        (ngSubmit)="guardarCambios()"
+      >
+
+        <div>
+
+          <label>Cédula</label>
+
+          <input
+            type="text"
+            name="editarCedulaMedico"
+            [(ngModel)]="medicoEditando.cedula"
+          >
+
+        </div>
+
+        <div>
+
+          <label>Nombre</label>
+
+          <input
+            type="text"
+            name="editarNombreMedico"
+            [(ngModel)]="medicoEditando.nombre"
+          >
+
+        </div>
+
+        <div>
+
+          <label>Apellido</label>
+
+          <input
+            type="text"
+            name="editarApellidoMedico"
+            [(ngModel)]="medicoEditando.apellido"
+          >
+
+        </div>
+
+        <div>
+
+          <label>Cargo</label>
+
+          <input
+            type="text"
+            name="editarCargoMedico"
+            [(ngModel)]="medicoEditando.cargo"
+          >
+
+        </div>
+
+        <div>
+
+          <label>Especialidad</label>
+
+          <input
+            type="text"
+            name="editarEspecialidadMedico"
+            [(ngModel)]="medicoEditando.especialidad"
+          >
+
+        </div>
+
+        <button
+          type="submit"
+        >
+          Guardar cambios
+        </button>
+
+        <button
+          type="button"
+          (click)="cancelarEdicion()"
+        >
+          Cancelar
+        </button>
+
+      </form>
+
+    }
+
+    <h3>Listado de médicos</h3>
+
+    <table border="1">
+
+      <thead>
+
+        <tr>
+
+          <th>ID</th>
+          <th>Cédula</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Cargo</th>
+          <th>Especialidad</th>
+          <th>Acciones</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        @for (
+          medico of medicos;
+          track medico.idMedico
+        ) {
+
+          <tr>
+
+            <td>
+              {{ medico.idMedico }}
+            </td>
+
+            <td>
+              {{ medico.cedula }}
+            </td>
+
+            <td>
+              {{ medico.nombre }}
+            </td>
+
+            <td>
+              {{ medico.apellido }}
+            </td>
+
+            <td>
+              {{ medico.cargo }}
+            </td>
+
+            <td>
+              {{ medico.especialidad }}
+            </td>
+
+            <td>
+
+              <button
+                type="button"
+                (click)="editarMedico(medico)"
+              >
+                Editar
+              </button>
+
+              <button
+                type="button"
+                (click)="eliminarMedico(
+                  medico.idMedico
+                )"
+              >
+                Eliminar
+              </button>
+
+            </td>
+
+          </tr>
+
+        }
+
+      </tbody>
+
+    </table>
+
+  </section>
+
+  <hr>
+
+  <!-- ===================================== -->
+  <!-- CITAS -->
+  <!-- ===================================== -->
+
+  <section id="citas">
+
+    <h2>Citas</h2>
+
+    <h3>Registrar cita</h3>
+
+    <form
+      (ngSubmit)="agregarCita()"
+    >
+
+      <div>
+
+        <label>Paciente</label>
+
+        <select
+          name="pacienteCita"
+          [(ngModel)]="nuevaCita.idPaciente"
+          required
+        >
+
+          <option
+            [ngValue]="0"
+          >
+            Seleccione un paciente
+          </option>
+
+          @for (
+            paciente of pacientes;
+            track paciente.idPaciente
+          ) {
+
+            <option
+              [ngValue]="paciente.idPaciente"
+            >
+
+              {{ paciente.nombre }}
+              {{ paciente.apellido }}
+
+            </option>
+
+          }
+
+        </select>
+
+      </div>
+
+      <div>
+
+        <label>Médico</label>
+
+        <select
+          name="medicoCita"
+          [(ngModel)]="nuevaCita.idMedico"
+          required
+        >
+
+          <option
+            [ngValue]="0"
+          >
+            Seleccione un médico
+          </option>
+
+          @for (
+            medico of medicos;
+            track medico.idMedico
+          ) {
+
+            <option
+              [ngValue]="medico.idMedico"
+            >
+
+              {{ medico.nombre }}
+              {{ medico.apellido }}
+              -
+              {{ medico.especialidad }}
+
+            </option>
+
+          }
+
+        </select>
+
+      </div>
+
+      <div>
+
+        <label>Fecha</label>
+
+        <input
+          type="date"
+          name="fechaCita"
+          [(ngModel)]="nuevaCita.fecha"
+          required
+        >
+
+      </div>
+
+      <div>
+
+        <label>Hora</label>
+
+        <input
+          type="time"
+          name="horaCita"
+          [(ngModel)]="nuevaCita.hora"
+          required
+        >
+
+      </div>
+
+      <div>
+
+        <label>Motivo</label>
+
+        <input
+          type="text"
+          name="motivoCita"
+          [(ngModel)]="nuevaCita.motivo"
+        >
+
+      </div>
+
+      <div>
+
+        <label>Tratamiento</label>
+
+        <input
+          type="text"
+          name="tratamientoCita"
+          [(ngModel)]="nuevaCita.tratamiento"
+        >
+
+      </div>
+
+      <div>
+
+        <label>
+
+          <input
+            type="checkbox"
+            name="estadoCita"
+            [(ngModel)]="nuevaCita.estado"
+          >
+
+          Activa
+
+        </label>
+
+      </div>
+
+      <button
+        type="button"
+        (click)="consultarClima()"
+      >
+        Consultar clima
+      </button>
+
+      <button
+        type="submit"
+      >
+        Guardar cita
+      </button>
+
+    </form>
+
+    <!-- ===================================== -->
+    <!-- CLIMA -->
+    <!-- ===================================== -->
+
+    @if (cargandoClima) {
+
+      <p>
+        Consultando clima...
+      </p>
+
+    }
+
+    @if (errorClima) {
+
+      <p>
+        {{ errorClima }}
+      </p>
+
+    }
+
+    @if (clima) {
+
+      <div>
+
+        <h3>
+          Pronóstico del clima
+        </h3>
+
+        @if (clima.disponible) {
+
+          <p>
+            <strong>Fecha:</strong>
+            {{ clima.fecha }}
+          </p>
+
+          <p>
+            <strong>Condición:</strong>
+            {{ clima.descripcion }}
+          </p>
+
+          <p>
+            <strong>Temperatura máxima:</strong>
+            {{ clima.temperaturaMax }} °C
+          </p>
+
+          <p>
+            <strong>Temperatura mínima:</strong>
+            {{ clima.temperaturaMin }} °C
+          </p>
+
+          <p>
+            <strong>Probabilidad de lluvia:</strong>
+            {{ clima.probabilidadLluvia }} %
+          </p>
+
+          <p>
+            <strong>Recomendación:</strong>
+            {{ clima.recomendacion }}
+          </p>
+
+        } @else {
+
+          <p>
+            {{ clima.mensaje }}
+          </p>
+
+        }
+
+      </div>
+
+    }
+
+    @if (citaEditando) {
+
+      <hr>
+
+      <h3>Editar cita</h3>
+
+      <form
+        (ngSubmit)="guardarCambiosCita()"
+      >
+
+        <div>
+
+          <label>Paciente</label>
+
+          <select
+            name="editarPacienteCita"
+            [(ngModel)]="citaEditando.idPaciente"
+          >
+
+            @for (
+              paciente of pacientes;
+              track paciente.idPaciente
+            ) {
+
+              <option
+                [ngValue]="paciente.idPaciente"
+              >
+
+                {{ paciente.nombre }}
+                {{ paciente.apellido }}
+
+              </option>
+
+            }
+
+          </select>
+
+        </div>
+
+        <div>
+
+          <label>Médico</label>
+
+          <select
+            name="editarMedicoCita"
+            [(ngModel)]="citaEditando.idMedico"
+          >
+
+            @for (
+              medico of medicos;
+              track medico.idMedico
+            ) {
+
+              <option
+                [ngValue]="medico.idMedico"
+              >
+
+                {{ medico.nombre }}
+                {{ medico.apellido }}
+
+              </option>
+
+            }
+
+          </select>
+
+        </div>
+
+        <div>
+
+          <label>Fecha</label>
+
+          <input
+            type="date"
+            name="editarFechaCita"
+            [(ngModel)]="citaEditando.fecha"
+          >
+
+        </div>
+
+        <div>
+
+          <label>Hora</label>
+
+          <input
+            type="time"
+            name="editarHoraCita"
+            [(ngModel)]="citaEditando.hora"
+          >
+
+        </div>
+
+        <div>
+
+          <label>Motivo</label>
+
+          <input
+            type="text"
+            name="editarMotivoCita"
+            [(ngModel)]="citaEditando.motivo"
+          >
+
+        </div>
+
+        <div>
+
+          <label>Tratamiento</label>
+
+          <input
+            type="text"
+            name="editarTratamientoCita"
+            [(ngModel)]="citaEditando.tratamiento"
+          >
+
+        </div>
+
+        <div>
+
+          <label>
+
+            <input
+              type="checkbox"
+              name="editarEstadoCita"
+              [(ngModel)]="citaEditando.estado"
+            >
+
+            Activa
+
+          </label>
+
+        </div>
+
+        <button
+          type="submit"
+        >
+          Guardar cambios
+        </button>
+
+        <button
+          type="button"
+          (click)="cancelarEdicionCita()"
+        >
+          Cancelar
+        </button>
+
+      </form>
+
+    }
+
+    @if (errorCitas) {
+
+      <p>
+        {{ errorCitas }}
+      </p>
+
+    }
+
+    <h3>Listado de citas</h3>
+
+    <table border="1">
+
+      <thead>
+
+        <tr>
+
+          <th>ID</th>
+          <th>Paciente</th>
+          <th>Médico</th>
+          <th>Fecha</th>
+          <th>Hora</th>
+          <th>Motivo</th>
+          <th>Tratamiento</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        @for (
+          cita of citas;
+          track cita.idCita
+        ) {
+
+          <tr>
+
+            <td>
+              {{ cita.idCita }}
+            </td>
+
+            <td>
+              {{ obtenerNombrePaciente(
+                cita.idPaciente
+              ) }}
+            </td>
+
+            <td>
+              {{ obtenerNombreMedico(
+                cita.idMedico
+              ) }}
+            </td>
+
+            <td>
+              {{ cita.fecha }}
+            </td>
+
+            <td>
+              {{ horaParaInput(
+                cita.hora
+              ) }}
+            </td>
+
+            <td>
+              {{ cita.motivo }}
+            </td>
+
+            <td>
+              {{ cita.tratamiento }}
+            </td>
+
+            <td>
+
+              @if (cita.estado) {
+
+                Activa
+
+              } @else {
+
+                Inactiva
+
+              }
+
+            </td>
+
+            <td>
+
+              <button
+                type="button"
+                (click)="editarCita(cita)"
+              >
+                Editar
+              </button>
+
+              <button
+                type="button"
+                class="ver-detalle"
+                (click)="verDetalleCita(cita)"
+              >
+                📄 Ver detalle
+              </button>
+
+              <button
+                type="button"
+                (click)="eliminarCita(
+                  cita.idCita
+                )"
+              >
+                Eliminar
+              </button>
+
+            </td>
+
+          </tr>
+
+        }
+
+      </tbody>
+
+    </table>
+
+  </section>
+
+
+  @if (citaDetalle) {
+    <div class="modal-fondo" (click)="cerrarDetalleCita()">
+      <div class="modal-detalle" (click)="$event.stopPropagation()">
+
+        <div class="modal-cabecera">
+          <div>
+            <span class="modal-etiqueta">Cita médica</span>
+            <h2>Detalle de la cita</h2>
+          </div>
+
+          <button
+            type="button"
+            class="modal-cerrar"
+            (click)="cerrarDetalleCita()"
+            aria-label="Cerrar"
+          >
+            ×
+          </button>
+        </div>
+
+        <div class="detalle-bloque">
+          <h3>Información de la cita</h3>
+
+          <div class="detalle-grid">
+            <p>
+              <strong>Paciente</strong>
+              <span>{{ obtenerNombrePaciente(citaDetalle.idPaciente) }}</span>
+            </p>
+
+            <p>
+              <strong>Médico</strong>
+              <span>{{ obtenerNombreMedico(citaDetalle.idMedico) }}</span>
+            </p>
+
+            <p>
+              <strong>Especialidad</strong>
+              <span>{{ obtenerEspecialidadMedico(citaDetalle.idMedico) }}</span>
+            </p>
+
+            <p>
+              <strong>Fecha</strong>
+              <span>{{ fechaParaInput(citaDetalle.fecha) }}</span>
+            </p>
+
+            <p>
+              <strong>Hora</strong>
+              <span>{{ horaParaInput(citaDetalle.hora) }}</span>
+            </p>
+
+            <p>
+              <strong>Estado</strong>
+              <span>
+                @if (citaDetalle.estado) {
+                  Activa
+                } @else {
+                  Inactiva
+                }
+              </span>
+            </p>
+          </div>
+
+          <p class="detalle-texto">
+            <strong>Motivo</strong>
+            <span>{{ citaDetalle.motivo }}</span>
+          </p>
+
+          <p class="detalle-texto">
+            <strong>Tratamiento</strong>
+            <span>{{ citaDetalle.tratamiento }}</span>
+          </p>
+        </div>
+
+        <div class="detalle-bloque clima-modal">
+          <h3>Clima para la fecha de la cita</h3>
+
+          @if (cargandoClimaDetalle) {
+            <p class="estado-clima">Consultando pronóstico...</p>
+          }
+
+          @if (errorClimaDetalle) {
+            <p class="estado-clima error-modal">
+              {{ errorClimaDetalle }}
+            </p>
+          }
+
+          @if (climaDetalle) {
+            @if (climaDetalle.disponible) {
+              <div class="detalle-grid">
+                <p>
+                  <strong>Condición</strong>
+                  <span>{{ climaDetalle.descripcion }}</span>
+                </p>
+
+                <p>
+                  <strong>Temperatura máxima</strong>
+                  <span>{{ climaDetalle.temperaturaMax }} °C</span>
+                </p>
+
+                <p>
+                  <strong>Temperatura mínima</strong>
+                  <span>{{ climaDetalle.temperaturaMin }} °C</span>
+                </p>
+
+                <p>
+                  <strong>Probabilidad de lluvia</strong>
+                  <span>{{ climaDetalle.probabilidadLluvia }} %</span>
+                </p>
+              </div>
+
+              <div class="recomendacion-modal">
+                <strong>Recomendación</strong>
+                <p>{{ climaDetalle.recomendacion }}</p>
+              </div>
+            } @else {
+              <p class="estado-clima">
+                {{ climaDetalle.mensaje }}
+              </p>
+            }
+          }
+        </div>
+
+        <div class="modal-pie">
+          <button
+            type="button"
+            (click)="cerrarDetalleCita()"
+          >
+            Imprimir
+          </button>
+        </div>
+
+      </div>
+    </div>
+  }
+
+</div>
